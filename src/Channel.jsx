@@ -7,7 +7,6 @@ class Channel extends Component {
 
   render() {
     const { channel, userChannels } = this.props
-    console.log('Channel component refresh')
 
     let channelIsUserChannel = userChannels.indexOf(this.props.channel.channel) === -1 ? false : true;
 

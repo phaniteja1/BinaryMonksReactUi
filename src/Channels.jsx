@@ -41,7 +41,6 @@ class Channels extends Component {
   }
 
   updateUserChannels() {
-    console.log('Updating state')
     this.setState({ userChannels: JSON.parse(localStorage.getItem('user-channels')) });
   }
 
@@ -60,28 +59,10 @@ class Channels extends Component {
   }
 
   getUrl() {
-    const { page } = this.state;
     let skipCount = this.page * this.pageItems;
-    console.log('Skip count : ', skipCount)
     let query = `l=${this.pageItems}&sk=${skipCount}`;
     return `${this.baseUrl}&${query}`;
   }
-
-  fetchMoreData = () => {
-    this.page ++;
-
-    axios.get(this.getUrl())
-      .then((response) => {
-        // once you have your data use setState to udpate state
-        this.setState((prevState, props) => {
-          if (!response.data.length) this.hasMore = false
-          return { 
-            channels: this.state.channels.concat(response.data),
-            userChannels: JSON.parse(localStorage.getItem('user-channels'))
-          };
-        })
-      });
-  };
 
   render() {
     const { channels, userChannels } = this.state;
@@ -91,22 +72,15 @@ class Channels extends Component {
       <div>
         {channels &&
           <div className="container-fluid channels">
-            <InfiniteScroll
-              pageStart={0}
-              loadMore={this.fetchMoreData}
-              hasMore={this.hasMore}
-              loader={<div className="loader" key={0}>Loading ...</div>}
-            >
-              <Masonry className={'channels-masonry'} >
-                {channels.map(function (channel, index) {
-                  return (
-                    <div key={index} className="col-4">
-                      <Channel channel={channel} userChannels={userChannels} addChannel={addChannel} removeChannel={removeChannel}/>
-                    </div>
-                  )
-                })}
-              </Masonry>
-            </InfiniteScroll>
+            <Masonry className={'channels-masonry'} >
+              {channels.map(function (channel, index) {
+                return (
+                  <div key={index} className="col-4">
+                    <Channel channel={channel} userChannels={userChannels} addChannel={addChannel} removeChannel={removeChannel}/>
+                  </div>
+                )
+              })}
+            </Masonry>
           </div>
         }
       </div>

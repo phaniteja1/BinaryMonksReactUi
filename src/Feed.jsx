@@ -43,7 +43,6 @@ class Feed extends Component {
   }
 
   getUrl() {
-    const { page } = this.state;
     let skipCount = this.page * this.pageItems;
     let query = `l=${this.pageItems}&sk=${skipCount}`;
     return `${this.baseUrl}&${query}`;
