@@ -53,3 +53,21 @@ body {
   color: #666 !important;
   justify-content: center;
 }
+
+.navbar-light {
+  background-color: #006bdd !important;
+}
+
+.navbar-light .navbar-brand{
+  font-weight: 300;
+  font-size: 1.4rem;
+  color: white !important;
+}
+
+.navbar-light .nav-link {
+  color: #d2d2d2 !important;
+}
+
+.navbar-light .nav-link.active {
+  color: white !important;
+}

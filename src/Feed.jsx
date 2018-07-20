@@ -79,12 +79,13 @@ class Feed extends Component {
     let filteredFeed = feed.filter(function (feeditem) {
       return userChannels.indexOf(feeditem.channel) !== -1;
     });
+
     return filteredFeed;
   }
 
   render() {
     const { userFeed } = this.state;
-    const loadingSpinner = <div className="row loading-spinner"><FontAwesomeIcon icon={faSpinner} size="4x" spin/></div>;
+    const loadingSpinner = <div className="row loading-spinner"><FontAwesomeIcon icon={faSpinner} size="4x" spin /></div>;
     return (
       <div className="container-fluid feed">
         {userFeed &&
