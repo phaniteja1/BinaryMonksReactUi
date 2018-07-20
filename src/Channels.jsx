@@ -10,8 +10,8 @@ class Channels extends Component {
 
     // initialize state
     this.state = {
-      channels: null,
-      userChannels: null
+      channels: [],
+      userChannels: []
     }
 
     // This binding is necessary to make `this` work in the callback

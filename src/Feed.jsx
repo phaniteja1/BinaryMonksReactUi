@@ -14,8 +14,8 @@ class Feed extends Component {
 
     // initialize state
     this.state = {
-      feed: null,
-      userFeed: null
+      feed: [],
+      userFeed: []
     }
   }
 
@@ -29,10 +29,8 @@ class Feed extends Component {
   // component has mounted properly
   componentDidMount() {
     // setting default channels if no channels exist in the local storage
-    if (this.getUserChannels()) {
-      if (!this.getUserChannels().length) {
-        localStorage.setItem('user-channels', JSON.stringify(['coding_horror']))
-      }
+    if (!this.getUserChannels()) {
+      localStorage.setItem('user-channels', JSON.stringify(['coding_horror']))
     }
 
     axios.get(this.getUrl())
