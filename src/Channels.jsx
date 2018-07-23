@@ -75,7 +75,7 @@ class Channels extends Component {
             <Masonry className={'channels-masonry'} >
               {channels.map(function (channel, index) {
                 return (
-                  <div key={index} className="col-4">
+                  <div key={index} className="col-3">
                     <Channel channel={channel} userChannels={userChannels} addChannel={addChannel} removeChannel={removeChannel}/>
                   </div>
                 )
