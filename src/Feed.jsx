@@ -3,6 +3,7 @@ import FeedItem from './FeedItem';
 import Masonry from 'react-masonry-component';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
+import ScrollUpButton from 'react-scroll-up-button';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "../node_modules/@fortawesome/free-solid-svg-icons";
@@ -88,6 +89,7 @@ class Feed extends Component {
     const loadingSpinner = <div className="row loading-spinner"><FontAwesomeIcon icon={faSpinner} size="4x" spin /></div>;
     return (
       <div className="container-fluid feed">
+        <ScrollUpButton ContainerClassName="goto-top-btn"/>
         {userFeed &&
           <InfiniteScroll
             pageStart={0}

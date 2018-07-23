@@ -71,3 +71,12 @@ body {
 .navbar-light .nav-link.active {
   color: white !important;
 }
+
+.goto-top-btn {
+  border-radius: 4rem;
+  width: 50px !important;
+}
+
+.goto-top-btn svg {
+  padding-left: 13px !important;
+}
