@@ -20,7 +20,7 @@ class Channels extends Component {
   }
 
   page = 0
-  pageItems = 20
+  pageItems = 200
   hasMore = true
 
   baseUrl = 'https://api.mlab.com/api/1/databases/binarymonks/collections/channels?apiKey=8MsekOtzEDmxaPSSnqqCNJ9KM1XKN2RL'
