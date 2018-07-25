@@ -4,9 +4,11 @@ import Masonry from 'react-masonry-component';
 import axios from 'axios';
 import InfiniteScroll from 'react-infinite-scroller';
 import ScrollUpButton from 'react-scroll-up-button';
+import Moment from 'moment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "../node_modules/@fortawesome/free-solid-svg-icons";
+import { tokensToRegExp } from "../node_modules/path-to-regexp";
 
 
 class Feed extends Component {
@@ -21,8 +23,10 @@ class Feed extends Component {
   }
 
   page = 0
-  pageItems = 100
+  pageItems = 30
   hasMore = true
+
+  initialDataIsSet = false
 
   baseUrl = 'https://api.mlab.com/api/1/databases/binarymonks/collections/feeds?apiKey=8MsekOtzEDmxaPSSnqqCNJ9KM1XKN2RL'
 
@@ -31,12 +35,14 @@ class Feed extends Component {
   componentDidMount() {
     // setting default channels if no channels exist in the local storage
     if (!this.getUserChannels()) {
-      localStorage.setItem('user-channels', JSON.stringify(['coding_horror']))
+      localStorage.setItem('user-channels', JSON.stringify(['coding_horror']));
     }
 
     axios.get(this.getUrl())
       .then((response) => {
         // once you have your data use setState to udpate state
+        this.initialDataIsSet = true;
+        console.log('Setting the initial data');
         this.setState((prevState, props) => {
           return { feed: response.data, userFeed: this.filterFeed(response.data) };
         })
@@ -45,12 +51,14 @@ class Feed extends Component {
 
   getUrl() {
     let skipCount = this.page * this.pageItems;
-    let query = `l=${this.pageItems}&sk=${skipCount}`;
+    console.log('Type of user channels : ', JSON.stringify(this.getUserChannels()));
+    let query = `l=${this.pageItems}&sk=${skipCount}&q={"channel": { $in: ${localStorage.getItem('user-channels')} }}`;
     return `${this.baseUrl}&${query}`;
   }
 
   fetchMoreData = () => {
-    this.page++;
+    console.log('Adding page')
+    if (this.initialDataIsSet) this.page++;
 
     axios.get(this.getUrl())
       .then((response) => {
@@ -61,14 +69,9 @@ class Feed extends Component {
             // feed: this.state.feed.concat(response.data)
             feed: this.state.feed.concat(response.data),
             userFeed: this.state.userFeed.concat(this.filterFeed(response.data))
-
           };
         })
       });
-  };
-
-  shuffle(array) {
-    return array.map((a) => [Math.random(), a]).sort((a, b) => a[0] - b[0]).map((a) => a[1]);
   }
 
   getUserChannels() {
@@ -76,12 +79,17 @@ class Feed extends Component {
   }
 
   filterFeed = (feed) => {
-    let userChannels = this.getUserChannels();
-    let filteredFeed = feed.filter(function (feeditem) {
-      return userChannels.indexOf(feeditem.channel) !== -1;
-    });
+    const { userFeed } = this.state;
+    let sortedFeed = [];
 
-    return filteredFeed;
+    if (feed) {
+      feed.forEach((feeditem) => {
+        feeditem['published'] = Moment(feeditem['published'])
+        sortedFeed.push(feeditem)
+      });
+    }
+
+    return sortedFeed;
   }
 
   render() {
