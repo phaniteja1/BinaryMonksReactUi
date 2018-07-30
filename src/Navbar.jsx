@@ -12,7 +12,10 @@ class Navbar extends Component {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav">
             <li className="nav-item">
-              <NavLink to="/" exact={true} className="nav-link" activeClassName="active">Feed</NavLink>
+              <NavLink to="/" exact={true} className="nav-link" activeClassName="active">Home</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink to="/Feed" exact={true} className="nav-link" activeClassName="active">Feed</NavLink>
             </li>
             <li className="nav-item">
               <NavLink to="/channels" className="nav-link" activeClassName="active">Channels</NavLink>

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Home from './Home';
 import Feed from './Feed';
 import Channels from './Channels';
 import Navbar from './Navbar';
@@ -13,7 +14,8 @@ class App extends Component {
           <div className='root'>
             <Navbar />
             <Switch>
-              <Route exact path="/" component={Feed} />
+              <Route exact path="/" component={Home} />
+              <Route exact path="/feed" component={Feed} />
               <Route path="/channels" component={Channels} />
             </Switch>
           </div>

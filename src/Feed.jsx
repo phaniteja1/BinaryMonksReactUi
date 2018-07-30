@@ -8,7 +8,6 @@ import Moment from 'moment';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSpinner } from "../node_modules/@fortawesome/free-solid-svg-icons";
-import { tokensToRegExp } from "../node_modules/path-to-regexp";
 
 
 class Feed extends Component {
@@ -35,7 +34,7 @@ class Feed extends Component {
   componentDidMount() {
     // setting default channels if no channels exist in the local storage
     if (!this.getUserChannels()) {
-      localStorage.setItem('user-channels', JSON.stringify(['coding_horror']));
+      localStorage.setItem('user-channels', JSON.stringify(['hacker_news', 'reddit_programming']));
     }
 
     axios.get(this.getUrl())
@@ -57,7 +56,6 @@ class Feed extends Component {
   }
 
   fetchMoreData = () => {
-    console.log('Adding page')
     if (this.initialDataIsSet) this.page++;
 
     axios.get(this.getUrl())

@@ -80,3 +80,19 @@ body {
 .goto-top-btn svg {
   padding-left: 13px !important;
 }
+
+.coding-love-gif {
+  margin-top: 2rem;
+  padding: 2rem;
+  border: 1px solid #e2e2e2;
+}
+
+.refresh-gif-btn {
+  font-size: .9rem;
+  color: #1e87f0;
+  cursor: pointer;
+}
+
+.home .loading-spinner {
+  margin-top: 2rem;
+}
