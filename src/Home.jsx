@@ -14,7 +14,7 @@ class Home extends Component {
     }
   }
 
-  baseUrl = 'https://coding-love-random-gif.now.sh'
+  baseUrl = 'https://coding-love-random-gif-xosghhdwfp.now.sh/'
 
   // handle async operation in this lifecycle method to ensure
   // component has mounted properly
@@ -25,7 +25,7 @@ class Home extends Component {
   getCodingLoveGif() {
     this.setState({gif: null});
 
-    axios.get(`${this.baseUrl}/gif`)
+    axios.get(`${this.baseUrl}gif`)
       .then((response) => {
         this.setState((prevState, props) => {
           return { gif: response.data };
