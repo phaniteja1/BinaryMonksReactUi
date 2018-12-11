@@ -14,7 +14,7 @@ class Home extends Component {
     }
   }
 
-  baseUrl = 'https://coding-love-random-gif-xosghhdwfp.now.sh/'
+  baseUrl = 'https://coding-love-random-gif-mxhgjogjpf.now.sh/'
 
   // handle async operation in this lifecycle method to ensure
   // component has mounted properly
